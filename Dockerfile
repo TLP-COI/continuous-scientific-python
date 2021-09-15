@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3:latest
 
 COPY env.yml /tmp/env.yml
-RUN conda install -y -n base -f /tmp/env.yml && \
+RUN conda env update --file /tmp/env.yml && \
     conda clean --all --yes
 
 COPY jupyter_config.json /tmp/jupyter_config.json
