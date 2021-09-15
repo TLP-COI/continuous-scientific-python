@@ -1,10 +1,11 @@
-FROM mambaorg/micromamba:latest
+FROM continuumio/miniconda3:latest
 
-COPY --chown=micromamba:micromamba env.yml /tmp/env.yml
-RUN micromamba install -y -n base -f /tmp/env.yml && \
-    micromamba clean --all --yes
+COPY env.yml /tmp/env.yml
+RUN conda install -y -n base -f /tmp/env.yml && \
+    conda clean --all --yes
 
-COPY --chown=micromamba:micromamba jupyter_config.json /tmp/jupyter_config.json
+COPY jupyter_config.json /tmp/jupyter_config.json
 RUN export cfgdir=$(jupyter --config-dir); \
     mkdir --parents $cfgdir; \
-    mv /tmp/jupyter_config.json $cfgdir/jupyter_config.json;
+    mv /tmp/jupyter_config.json $cfgdir/jupyter_config.json; \
+    python -m nb_conda_kernels list;
