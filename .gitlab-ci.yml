@@ -10,12 +10,16 @@ variables:
   # API_REPOSITORY: $CI_REGISTRY/continuous-scientific-python
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 
-
 # before_script:
   # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 build-docker:
   stage: build-docker
+  tags:
+    - container
+    - python
+    - conda
+    - mamba
   script:
     # - docker build -f Dockerfile -t $API_REPOSITORY:latest .
     # - docker push $API_REPOSITORY:latest
