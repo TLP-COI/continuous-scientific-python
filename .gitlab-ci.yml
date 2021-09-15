@@ -16,6 +16,7 @@ variables:
 build-docker:
   stage: build-docker
   tags:
+    - shared
     - container
     - python
     - conda
